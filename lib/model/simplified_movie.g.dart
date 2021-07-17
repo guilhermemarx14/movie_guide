@@ -7,14 +7,15 @@ part of 'simplified_movie.dart';
 // **************************************************************************
 
 SimplifiedMovie _$SimplifiedMovieFromJson(Map<String, dynamic> json) {
-  return SimplifiedMovie()
-    ..id = json['id'] as int?
-    ..vote_average = (json['vote_average'] as num?)?.toDouble()
-    ..title = json['title'] as String?
-    ..poster_url = json['poster_url'] as String?
-    ..genres =
-        (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList()
-    ..release_date = json['release_date'] as String?;
+  return SimplifiedMovie(
+    id: json['id'] as int?,
+    vote_average: (json['vote_average'] as num?)?.toDouble(),
+    title: json['title'] as String?,
+    poster_url: json['poster_url'] as String?,
+    genres:
+        (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    release_date: json['release_date'] as String?,
+  );
 }
 
 Map<String, dynamic> _$SimplifiedMovieToJson(SimplifiedMovie instance) =>
