@@ -46,7 +46,7 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
           image: DecorationImage(
               colorFilter: new ColorFilter.mode(
                   Colors.black.withOpacity(0.2), BlendMode.dstATop),
-              image: NetworkImage(movie!.poster_url!),
+              image: NetworkImage(movie!.poster_url!, scale: 5),
               fit: BoxFit.cover),
         ),
         child: SingleChildScrollView(
@@ -54,13 +54,25 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                   child: Text(
                     movie!.original_title! + '   [${movie!.original_language}]',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ytsGreen,
                       fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '\'' + movie!.tagline! + '\'',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ytsGreen,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -73,7 +85,7 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
                   ),
                   child: Image.network(
                     movie!.poster_url!,
-                    width: 2 / 3 * width,
+                    width: 1 / 3 * width,
                   ),
                 ),
                 Padding(
@@ -91,7 +103,7 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
                   child: Text(
-                    movie!.overview!,
+                    movie!.overview! + '  (${movie!.runtime} min)',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -108,6 +120,35 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
                   ),
                 ),
                 Genres(movie!),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Avaluation',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ytsGreen,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text('${movie!.vote_average!}/10'),
+                        Icon(Icons.star_border)
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text('${movie!.vote_count!} votes'),
+                        Icon(Icons.people_alt_outlined)
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -116,10 +157,14 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
     return Scaffold(
       backgroundColor: background,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
+        preferredSize: Size.fromHeight(60.0),
         child: AppBar(
           backgroundColor: appBarBackground,
-          title: Text('Movie Details'),
+          title: Text(
+            'Movie Details',
+            style: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.bold, color: ytsGreen),
+          ),
         ),
       ),
       body: body,

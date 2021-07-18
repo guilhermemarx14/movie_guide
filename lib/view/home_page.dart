@@ -4,7 +4,7 @@ import 'package:movie_guide/model/simplified_movie.dart';
 import 'package:movie_guide/util/constants.dart';
 import 'dart:async';
 
-import 'DetailedMovieView.dart';
+import 'detailed_movie_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -32,15 +32,7 @@ class _HomePageState extends State<HomePage> {
     var height = MediaQuery.of(context).size.height;
     var body;
     MyImage(String? url) {
-      return Image.network(
-        url ?? '',
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      );
+      return Image.network(url ?? '');
     }
 
     Title(String? title) {
@@ -85,21 +77,6 @@ class _HomePageState extends State<HomePage> {
     else {
       var allMovies = <Widget>[];
 
-      allMovies.add(
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            'titulo',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: ytsGreen,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      );
-
       movies.forEach((element) => allMovies.add(MovieShow(element)));
       body = SingleChildScrollView(
         child: Center(
@@ -113,8 +90,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: background,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(backgroundColor: appBarBackground),
+        preferredSize: Size.fromHeight(60.0),
+        child: AppBar(
+          backgroundColor: appBarBackground,
+          title: Text(
+            'Movie Guide',
+            style: TextStyle(
+                fontSize: 30, fontWeight: FontWeight.bold, color: ytsGreen),
+          ),
+        ),
       ),
       body: body,
     );
