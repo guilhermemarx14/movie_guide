@@ -7,26 +7,27 @@ part of 'detailed_movie.dart';
 // **************************************************************************
 
 DetailedMovie _$DetailedMovieFromJson(Map<String, dynamic> json) {
-  return DetailedMovie()
-    ..adult = json['adult'] as bool?
-    ..backdrop_url = json['backdrop_url'] as String?
-    ..budget = json['budget'] as int?
-    ..genres =
-        (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList()
-    ..homepage = json['homepage'] as String?
-    ..id = json['id'] as int?
-    ..imdb_id = json['imdb_id'] as String?
-    ..original_language = json['original_language'] as String?
-    ..original_title = json['original_title'] as String?
-    ..overview = json['overview'] as String?
-    ..popularity = (json['popularity'] as num?)?.toDouble()
-    ..poster_url = json['poster_url'] as String?
-    ..release_date = json['release_date'] as String?
-    ..revenue = json['revenue'] as int?
-    ..runtime = json['runtime'] as int?
-    ..tagline = json['tagline'] as String?
-    ..vote_average = (json['vote_average'] as num?)?.toDouble()
-    ..vote_count = json['vote_count'] as int?;
+  return DetailedMovie(
+    adult: json['adult'] as bool?,
+    backdrop_url: json['backdrop_url'] as String?,
+    budget: json['budget'] as int?,
+    genres:
+        (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    homepage: json['homepage'] as String?,
+    id: json['id'] as int?,
+    imdb_id: json['imdb_id'] as String?,
+    original_language: json['original_language'] as String?,
+    original_title: json['original_title'] as String?,
+    overview: json['overview'] as String?,
+    popularity: (json['popularity'] as num?)?.toDouble(),
+    poster_url: json['poster_url'] as String?,
+    release_date: json['release_date'] as String?,
+    revenue: json['revenue'] as int?,
+    runtime: json['runtime'] as int?,
+    tagline: json['tagline'] as String?,
+    vote_average: (json['vote_average'] as num?)?.toDouble(),
+    vote_count: json['vote_count'] as int?,
+  );
 }
 
 Map<String, dynamic> _$DetailedMovieToJson(DetailedMovie instance) =>

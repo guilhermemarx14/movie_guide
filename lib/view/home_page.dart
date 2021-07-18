@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_guide/controller/simplified_movie_controller.dart';
 import 'package:movie_guide/model/simplified_movie.dart';
 import 'package:movie_guide/util/constants.dart';
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   List<SimplifiedMovie> movies = [];
 
   void initState() {
-    SimplifiedMovie.getMovies().then((value) {
+    SimplifiedMovieController.getMovies().then((value) {
       setState(() {
         movies = value;
         print(value);
@@ -27,6 +29,17 @@ class _HomePageState extends State<HomePage> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var body;
+    MyImage(String? url) {
+      return Image.network(
+        url ?? '',
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+    }
 
     Title(String? title) {
       return Padding(
@@ -55,10 +68,7 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(16.0),
                 color: Colors.white,
               ),
-              child: Image.network(
-                movie.poster_url ?? '',
-                width: 2 / 3 * width,
-              ),
+              child: MyImage(movie.poster_url),
             ),
           ],
         ),
