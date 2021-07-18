@@ -4,6 +4,8 @@ import 'package:movie_guide/model/simplified_movie.dart';
 import 'package:movie_guide/util/constants.dart';
 import 'dart:async';
 
+import 'DetailedMovieView.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -58,7 +60,10 @@ class _HomePageState extends State<HomePage> {
 
     MovieShow(SimplifiedMovie movie) {
       return GestureDetector(
-        onTap: () => {},
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailedMovieView(movie.id!))),
         child: Column(
           children: [
             Title(movie.title),
