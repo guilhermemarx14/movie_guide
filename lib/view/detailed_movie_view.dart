@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_guide/controller/detailed_movie_controller.dart';
 import 'package:movie_guide/model/detailed_movie.dart';
 import 'package:movie_guide/util/constants.dart';
+import 'package:intl/intl.dart';
 
 class DetailedMovieView extends StatefulWidget {
   const DetailedMovieView(this.id, {Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var body;
-
+    final currencyMask = new NumberFormat("U\$ #,##0", "en_US");
     Genres(DetailedMovie movie1) {
       var genres = <Widget>[];
       movie1.genres?.forEach((element) {
@@ -56,7 +57,7 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                   child: Text(
-                    movie!.original_title! + '   [${movie!.original_language}]',
+                    movie!.title! + '   [${movie!.original_language}]',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ytsGreen,
@@ -148,7 +149,74 @@ class _DetailedMovieViewState extends State<DetailedMovieView> {
                       ],
                     ),
                   ],
-                )
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    'Extra Information',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ytsGreen,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Original Title: ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        Text(
+                            '${movie!.original_title!.length > 30 ? movie!.original_title!.substring(0, 30) + ' ...' : movie!.original_title!}'),
+                      ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Release Date: ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        Text(DateFormat('dd/MM/yyyy').format(
+                            DateFormat('yyyy-MM-dd')
+                                .parse(movie!.release_date!))),
+                      ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Budget: ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        Text('${currencyMask.format(movie!.budget!)}'),
+                      ]),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Revenue: ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        Text('${currencyMask.format(movie!.revenue!)}'),
+                      ]),
+                ),
               ],
             ),
           ),

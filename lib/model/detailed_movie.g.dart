@@ -9,6 +9,7 @@ part of 'detailed_movie.dart';
 DetailedMovie _$DetailedMovieFromJson(Map<String, dynamic> json) {
   return DetailedMovie(
     adult: json['adult'] as bool?,
+    title: json['title'] as String?,
     backdrop_url: json['backdrop_url'] as String?,
     budget: json['budget'] as int?,
     genres:
@@ -32,6 +33,7 @@ DetailedMovie _$DetailedMovieFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$DetailedMovieToJson(DetailedMovie instance) =>
     <String, dynamic>{
+      'title': instance.title,
       'adult': instance.adult,
       'backdrop_url': instance.backdrop_url,
       'budget': instance.budget,

@@ -3,6 +3,7 @@ part 'detailed_movie.g.dart';
 
 @JsonSerializable()
 class DetailedMovie {
+  String? title;
   bool? adult;
   String? backdrop_url;
   int? budget;
@@ -24,6 +25,7 @@ class DetailedMovie {
 
   DetailedMovie(
       {this.adult,
+      this.title,
       this.backdrop_url,
       this.budget,
       this.genres,
